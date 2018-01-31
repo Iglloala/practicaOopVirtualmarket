@@ -3,12 +3,17 @@ require_once('header.php');
 ?>
 
 <!-- Contenido -->
-<section id="content">
-	<div class="col-12">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab inventore dolore nam, consequuntur ad assumenda delectus accusantium reiciendis, possimus voluptatibus blanditiis earum dolor, tenetur facere quisquam nemo distinctio. Accusantium, quis!</p>
-		<?php print_r($con); ?>
+<div class='container-fluid'>
+	<div class="container">
+		<section id="contenido" class="row">
+			<div class="col-12">
+				<h1>Inicio</h1>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum eos cupiditate vel nam possimus modi nostrum hic amet praesentium mollitia, pariatur officia soluta quo sed, inventore, fugit delectus incidunt odit!
+				<p>Ejecutar tests: <a href="tests.php">tests.php</a></p>
+			</div>
+		</section>
 	</div>
-</section>
+</div>
 
 <?php
 require_once('footer.php');

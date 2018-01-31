@@ -1,7 +1,12 @@
 <?php
-	require_once('model/database.php');
-	$database = new Database;
-	$database->connect();
+	require_once('model/Database.class.php');
+	require_once('model/Cliente.class.php');
+	require_once('model/LineaPedido.class.php');
+	require_once('model/Pedido.class.php');
+	require_once('model/Producto.class.php');
+	require_once('model/Ticket.class.php');
+	$database = new Database();
+	$con = $database->conectar();
 ?>
 <!DOCTYPE html>
 <html lang="es">
