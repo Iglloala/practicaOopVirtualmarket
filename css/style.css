@@ -1,7 +1,11 @@
 /* Mis mierdas */
 
+#fila-mensajes{
+	padding-top: 1rem;
+}
+
 #contenido {
-	padding-top: 2rem;	
+	padding-top: 1rem;	
 }
 
 #footer-dch {

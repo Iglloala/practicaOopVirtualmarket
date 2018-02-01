@@ -1,4 +1,7 @@
 <?php
+	session_start();
+	require_once('controller/controllerFunctions.php');
+	require_once('view/viewFunctions.php');
 	require_once('model/Database.class.php');
 	require_once('model/Cliente.class.php');
 	require_once('model/LineaPedido.class.php');
@@ -31,4 +34,16 @@
 					</div>
 				</div>
 			</header>
+		</div>
+		<div id="wrapper-mensajes" class="container">
+			<div id="fila-mensajes" class="row">
+				<div class="col-12">
+					<?php 
+						if (isset($_SESSION['colaMensajes']) && count($_SESSION['colaMensajes'])>0){
+							mostrarMensajes($_SESSION['colaMensajes']);
+							unset($_SESSION['colaMensajes']);
+						}
+					?>
+				</div>
+			</div>
 		</div>

@@ -1,5 +1,5 @@
 <?php
-require_once('header.php');
+require_once('view/header.php');
 ?>
 
 <!-- Contenido -->
@@ -8,13 +8,14 @@ require_once('header.php');
 		<section id="contenido" class="row">
 			<div class="col-12">
 				<h1>Inicio</h1>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum eos cupiditate vel nam possimus modi nostrum hic amet praesentium mollitia, pariatur officia soluta quo sed, inventore, fugit delectus incidunt odit!
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum eos cupiditate vel nam possimus modi nostrum hic amet praesentium mollitia, pariatur officia soluta quo sed, inventore, fugit delectus incidunt odit!</p>
 				<p>Ejecutar tests: <a href="tests.php">tests.php</a></p>
+				<p>Insertar producto: <a href="insertarProducto.php">Insertar producto</a></p>
 			</div>
 		</section>
 	</div>
 </div>
 
 <?php
-require_once('footer.php');
+require_once('view/footer.php');
 ?>		
