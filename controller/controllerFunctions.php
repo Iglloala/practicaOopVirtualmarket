@@ -1,8 +1,9 @@
 <?php 
 // Función para obtener datos pasados por post y que se filtren antes de manejarlos
-function obtenerPost($nombre){
+function obtenerPost($con, $nombre){
 	if (isset($_POST["$nombre"]) && $_POST["$nombre"] != ""){
-		return $con->real_escape_string($_POST["$nombre"]);
+		$dato = $con->real_escape_string($_POST["$nombre"]);
+		return $dato;
 	}
 	else {
 		return false;

@@ -28,7 +28,7 @@ echo $salida;
 // Función que genera y muestra el formulario para añadir productos en la bbdd
 function getFormInsertarProducto(){
 	// Empiezo a formatear el formulario
-	$salida = "<form method='post' action=''>";
+	$salida = "<form method='post' enctype='multipart/form-data'>";
 	// - nombre
 	$salida .= "  <div class='form-group'>";
 	$salida .= "    <label for='nombre'>Nombre:</label>";
@@ -50,14 +50,14 @@ function getFormInsertarProducto(){
 	$salida .= "    <input class='form-control' name='marca' type='text'>";
 	$salida .= "  </div>";
 	// - categoría
-	$salida .= "    <label class='custom-control-label'>Categoría</label>";
+	$salida .= "    <label>Categoría</label>";
 	$salida .= "  <div class='form-group'>";
-	$salida .= "    <input name='categoria' type='radio' value='frío'>";
-	$salida .= "    <label for='categoria'>Frío</label>";
-	$salida .= "    <input name='categoria' type='radio' value='congelado'>";
-	$salida .= "    <label for='categoria'>Congelado</label>";
-	$salida .= "    <input name='categoria' type='radio' value='seco'>";
-	$salida .= "    <label for='categoria'>Seco</label>";
+	$salida .= "    <input id='radioFrio' name='categoria' type='radio' value='frío'>";
+	$salida .= "    <label for='radioFrio'>Frío</label>";
+	$salida .= "    <input id='radioCongelado' name='categoria' type='radio' value='congelado'>";
+	$salida .= "    <label for='radioCongelado'>Congelado</label>";
+	$salida .= "    <input id='radioSeco' name='categoria' type='radio' value='seco'>";
+	$salida .= "    <label for='radioSeco'>Seco</label>";
 	$salida .= "  </div>";
 	// - peso
 	$salida .= "  <div class='form-group'>";
@@ -78,6 +78,10 @@ function getFormInsertarProducto(){
 	$salida .= "  <div class='form-group'>";
 	$salida .= "    <label for='precio'>Precio:</label>";
 	$salida .= "    <input class='form-control' name='precio' type='number'>";
+	$salida .= "  </div>";
+	// - submit
+	$salida .= "  <div class='form-group'>";
+	$salida .= "    <input id='btEnviar' name='btEnviar' type='submit'>";
 	$salida .= "  </div>";
 	// Lo muestra
 	echo $salida;

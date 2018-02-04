@@ -3,7 +3,7 @@ require_once('view/header.php');
 ?>
 
 <!-- Contenido -->
-<div class='container-fluid'>
+<div id='wrapper-contenido' class='container-fluid'>
 	<div class="container">
 		<section id="contenido" class="row">
 			<div class="col-12">
