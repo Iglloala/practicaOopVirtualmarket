@@ -10,7 +10,7 @@ require_once('view/header.php');
 				<h1>Inicio</h1>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum eos cupiditate vel nam possimus modi nostrum hic amet praesentium mollitia, pariatur officia soluta quo sed, inventore, fugit delectus incidunt odit!</p>
 				<p>Ejecutar tests: <a href="tests.php">tests.php</a></p>
-				<p>Insertar producto: <a href="insertarProducto.php">Insertar producto</a></p>
+				<p>Insertar producto: <a href="adminInsertarProducto.php">Insertar producto</a></p>
 			</div>
 		</section>
 	</div>
