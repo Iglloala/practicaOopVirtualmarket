@@ -1,5 +1,7 @@
 <?php
+	// Inicia la sessión
 	session_start();
+	// Carga los ficheros
 	require_once('/controller/controllerFunctions.php');
 	require_once('/view/viewFunctions.php');
 	require_once('/model/Database.class.php');
@@ -8,8 +10,17 @@
 	require_once('/model/Pedido.class.php');
 	require_once('/model/Producto.class.php');
 	require_once('/model/Ticket.class.php');
+	require_once('/model/Carrito.class.php');
+	// Inicializa la bbdd
 	$database = new Database();
 	$con = $database->conectar();
+	// Inicializa el carrito
+	$carrito = new Carrito();
+
+	// Si se ha enviado btLogin pues autentica
+	if (isset($_POST['btLogin'])){
+		autenticar();
+	}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,6 +42,23 @@
 				<div class="row">
 					<div class="col-12">
 						<h1>VirtualMarket</h1>
+					</div>
+				</div>
+				<!-- Menú -->
+				<div class='row'>
+					<div class="col-6">
+						<?php mostrarMenuNavegacion() ?>
+					</div>
+					<div class="col-6">
+						<?php
+							// Compruebo si el usuario está logueado
+							if ($_SESSION['dni']){
+								mostrarIconoCarrito();
+							}
+							else {
+								mostrarFormularioLogin();
+							}
+						?> 
 					</div>
 				</div>
 			</header>

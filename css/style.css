@@ -1,4 +1,7 @@
 /* Mis mierdas */
+#formularioLogin {
+	justify-content: flex-end;
+}
 
 #fila-mensajes{
 	padding-top: 1rem;

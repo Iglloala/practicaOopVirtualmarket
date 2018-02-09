@@ -25,6 +25,76 @@ function mostrarMensajes($colaMensajes){
 echo $salida;
 }
 
+// Me creo una función para mostrar el menú de navegación
+function mostrarMenuNavegacion(){
+	// Determina cuál es la página activa
+	$pagActiva = $_SERVER['PHP_SELF'];
+	$pagActiva = explode('/', $pagActiva);
+	$pagActiva = $pagActiva[2];
+	switch ($pagActiva) {
+		case 'index.php':
+			$pagActiva = 'Inicio';
+			break;
+		case 'tests.php':
+			$pagActiva = 'Tests';
+			break;
+		default:
+			$pagActiva = 'Inicio';
+	}
+	// Empieza a formatear la salida
+	$salida = '';
+	$salida .= "<nav class='navbar navbar-expand-lg navbar-dark bg-dark'>\n";
+	$salida .= "  <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#contenido-navegacion' aria-controls='contenido-navegacion' aria-expanded='false' aria-label='Desplegar menú'>\n";
+	$salida .= "    <span class='navbar-toggler-icon'></span>\n";
+	$salida .= "  </button>\n";
+	$salida .= "  <div class='collapse navbar-collapse' id='contenido-navegacion'>\n";
+	$salida .= "    <ul class='navbar-nav mr-auto'>\n";
+	// Inicio
+	$clase = ($pagActiva == 'Inicio')?'active':'';
+	$salida .= "      <li class='nav-item $clase'>\n";
+	$salida .= "        <a class='nav-link' href='index.php'>Inicio<span class='sr-only'>(current)</span></a>\n";
+	$salida .= "      </li>";
+	// Tests
+	$clase = ($pagActiva == 'Tests')?'active':'';
+	$salida .= "      <li class='nav-item $clase'>\n";
+	$salida .= "        <a class='nav-link' href='tests.php'>Tests<span class='sr-only'>(current)</span></a>\n";
+	$salida .= "      </li>";
+	// Cierre
+	$salida .= "    </ul>";
+	$salida .= "  </div>";
+	// Y muestra el resultado
+	echo $salida;
+
+}
+
+// Creo una función para mostrar el formulario de login
+function mostrarFormularioLogin(){
+	// Preparo la salida
+	$salida = "";
+	$salida .= "<form id='formularioLogin' method='POST' action='' class='form-inline'>";
+	// DNI
+	$salida .= "  <label class='sr-only' for='dni'>DNI:</label>";
+	$salida .= "  <input type='text' class='form-control mb-2 mr-sm-2' id='dni' placeholder='dni' name='dni'>";
+	// PASSWORD
+	$salida .= "  <label class='sr-only' for='password'>Password:</label>";
+	$salida .= "  <input type='password' class='form-control mb-2 mr-sm-2' id='password' placeholder='password' name='password'>";
+	// SUBMIT
+	$salida .= "  <button type='submit' class='btn btn-primary mb-2' name='btLogin'>Login</button>";
+	$salida .= "</form>";
+	// Y lo muestro
+	echo $salida;
+}
+
+// Función para mostrar el carrito de la compra
+function mostrarIconoCarrito($nProductos=0){
+	// Prepara la salida
+	$salida = "<div id='icono-carrito'>";
+	$numLineas = count(json_decode($_COOKIE['lineasCarrito'], true));
+	$salida .= "<a href='vercarrito.php'><i class='fa fa-shopping-cart'></i>($numLineas)</a>";
+	$salida .= "</div>";
+	echo $salida;
+}
+
 // Función que genera y muestra el formulario para añadir productos en la bbdd
 function getFormInsertarProducto(){
 	// Empiezo a formatear el formulario

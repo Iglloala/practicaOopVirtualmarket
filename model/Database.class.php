@@ -16,6 +16,7 @@ Class Database {
 		$this->dbname = 'virtualmarket';
 		$this->dbport = '3306';
 	}
+	
 	// Método destructor
 	public function __destruct(){
 		$this->desconectar();

@@ -29,4 +29,59 @@ function insertarMensaje($mensaje){
 	array_push($_SESSION['colaMensajes'], $mensaje);
 }
 
+function autenticar(){
+	// Compruebo si se han pasado las credenciales
+	if (obtenerPost("dni") && obtenerPost("password")){
+		$dni = obtenerPost("dni");
+		$password = obtenerPost("password");
+		// Preparo una consulta para obtener el nombre de usuario que haya en la bbdd si el dni y la password almacenadas coinciden con las proporcionadas
+		$consulta = "SELECT nombre FROM  clientes WHERE dniCliente='$dni' AND pwd='$password'";
+		// Compruebo que se retorna una respuesta
+		if ($respuesta = mysqli_query($link, $consulta)){
+			// Compruebo que devuelve alguna fila
+			if ($fila = mysqli_fetch_assoc($respuesta)) {
+				// Compruebo que la fila tiene el campo que busco
+				if ($nombre = $fila['nombre']){
+					// Sólo en este caso establezco la variable de sesión que me asegura que el usuario esté correctamente autenticado además de las cookies necesarias para el control del carrito
+					$_SESSION['usuario'] = $nombre;
+					$_SESSION['dni'] = $dni;
+					// Inserto el mensaje de confirmación
+					insertarMensaje(['tipo'=>'success', 'texto'=>"Usuario autenticado correctamente"]);
+					// Vuelvo a la página de inicio
+					volverInicio();
+				}
+			}
+			else { 
+					insertarMensaje(['tipo'=>'danger', 'texto'=>'Las credenciales introducidas no son válidas']);
+					volverInicio();
+				}
+		}
+		else {
+			insertarMensaje(['tipo'=>'danger', 'texto'=>'No se ha podido obtener una respuesta de la bbdd']);
+			volverInicio();
+		}
+	}
+	else {
+		insertarMensaje(['tipo'=>'danger', 'texto'=>'No se han proporcionado credenciales de acceso']);
+		volverInicio();
+	}
+}
+
+// Función que devuleve true o false según se esté autenticado o no
+function autenticado() {
+	if (isset($_SESSION['usuario'])){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// funcion para volver a la página ppal
+function volverInicio(){
+	$url = "index.php";
+	header("Location: $url");
+	die();
+}
+
 ?>
