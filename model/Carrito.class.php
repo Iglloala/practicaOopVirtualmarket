@@ -1,9 +1,11 @@
 <?php
 class Carrito {
 	// PROPIEDADES
+	//-------------------
 	private $items = [];
 
 	// CONSTRUCTOR
+	//-------------------
 	public function __construct(){
 		// Comprueba si existe la cookie
 		if ($_COOKIE['lineasCarrito']){
@@ -19,7 +21,27 @@ class Carrito {
 		}
 	}
 
+	// MÉTODOS MÁGICOS
+	//-------------------
+
+	// Método mágico __get
+	public function __get($propiedad){
+		if (property_exists($this, $propiedad)){
+			return $this->$propiedad;
+		}
+		else {
+			return false;
+		}
+	}
+
+	// Método mágico __set
+	public function __set($propiedad, $valor){
+		$this->$propiedad = $valor;
+	}
+
 	// MÉTODOS
+	//-------------------
+
 	public function aniadirProducto($producto, $cantidad){
 		// Haz cosas
 	}

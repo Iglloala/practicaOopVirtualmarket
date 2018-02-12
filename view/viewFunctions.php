@@ -25,7 +25,7 @@ function mostrarMensajes($colaMensajes){
 echo $salida;
 }
 
-// Me creo una función para mostrar el menú de navegación
+// Me creo una función para mostrar el menú de administración
 function mostrarMenuNavegacion(){
 	// Determina cuál es la página activa
 	$pagActiva = $_SERVER['PHP_SELF'];
@@ -34,9 +34,6 @@ function mostrarMenuNavegacion(){
 	switch ($pagActiva) {
 		case 'index.php':
 			$pagActiva = 'Inicio';
-			break;
-		case 'tests.php':
-			$pagActiva = 'Tests';
 			break;
 		default:
 			$pagActiva = 'Inicio';
@@ -54,10 +51,55 @@ function mostrarMenuNavegacion(){
 	$salida .= "      <li class='nav-item $clase'>\n";
 	$salida .= "        <a class='nav-link' href='index.php'>Inicio<span class='sr-only'>(current)</span></a>\n";
 	$salida .= "      </li>";
-	// Tests
-	$clase = ($pagActiva == 'Tests')?'active':'';
+	// Cierre
+	$salida .= "    </ul>";
+	$salida .= "  </div>";
+	// Y muestra el resultado
+	echo $salida;
+
+}
+
+// Me creo una función para mostrar el menú de administración
+function mostrarMenuAdministracion(){
+	// Determina cuál es la página activa
+	$pagActiva = $_SERVER['PHP_SELF'];
+	$pagActiva = explode('/', $pagActiva);
+	$pagActiva = $pagActiva[2];
+	switch ($pagActiva) {
+		case 'index.php':
+			$pagActiva = 'Inicio';
+			break;
+		case 'adminEjecutarTests.php':
+			$pagActiva = 'EjecutarTests';
+			break;
+		case 'adminInsertarProducto.php':
+			$pagActiva = 'InsertarProducto';
+			break;	
+		default:
+			$pagActiva = 'Inicio';
+	}
+	// Empieza a formatear la salida
+	$salida = '';
+	$salida .= "<nav class='navbar navbar-expand-lg navbar-dark bg-dark'>\n";
+	$salida .= "  <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#contenido-navegacion' aria-controls='contenido-navegacion' aria-expanded='false' aria-label='Desplegar menú'>\n";
+	$salida .= "    <span class='navbar-toggler-icon'></span>\n";
+	$salida .= "  </button>\n";
+	$salida .= "  <div class='collapse navbar-collapse' id='contenido-navegacion'>\n";
+	$salida .= "    <ul class='navbar-nav mr-auto'>\n";
+	// Inicio
+	$clase = ($pagActiva == 'Inicio')?'active':'';
 	$salida .= "      <li class='nav-item $clase'>\n";
-	$salida .= "        <a class='nav-link' href='tests.php'>Tests<span class='sr-only'>(current)</span></a>\n";
+	$salida .= "        <a class='nav-link' href='index.php'>Inicio<span class='sr-only'>(current)</span></a>\n";
+	$salida .= "      </li>";
+	// EjecutarTests
+	$clase = ($pagActiva == 'EjecutarTests')?'active':'';
+	$salida .= "      <li class='nav-item $clase'>\n";
+	$salida .= "        <a class='nav-link' href='adminEjecutarTests.php'>Ejecutar tests<span class='sr-only'>(current)</span></a>\n";
+	$salida .= "      </li>";
+	// InsertarProducto
+	$clase = ($pagActiva == 'InsertarProducto')?'active':'';
+	$salida .= "      <li class='nav-item $clase'>\n";
+	$salida .= "        <a class='nav-link' href='adminInsertarProducto.php'>Insertar producto<span class='sr-only'>(current)</span></a>\n";
 	$salida .= "      </li>";
 	// Cierre
 	$salida .= "    </ul>";
@@ -85,12 +127,22 @@ function mostrarFormularioLogin(){
 	echo $salida;
 }
 
+// Creo una función para mostrar el mensaje de bienvenida y el botón para cerrar la sesión
+function mostrarDesconexion(){
+	$nombre = $_SESSION['usuario'];
+	$salida = "";
+	$salida .= "<div id='bloqueDesconexion'>";
+	$salida .= "  <span>Bienvenido $nombre</span>";
+	$salida .= "  <span><a href='desconexion.php'> (Desconectar)</a></span>";
+	$salida .= "</div>";
+	echo $salida;
+}
+
 // Función para mostrar el carrito de la compra
 function mostrarIconoCarrito($nProductos=0){
 	// Prepara la salida
 	$salida = "<div id='icono-carrito'>";
-	$numLineas = count(json_decode($_COOKIE['lineasCarrito'], true));
-	$salida .= "<a href='vercarrito.php'><i class='fa fa-shopping-cart'></i>($numLineas)</a>";
+	$salida .= "<a href='vercarrito.php'><i class='fa fa-shopping-cart'></i>($nProductos)</a>";
 	$salida .= "</div>";
 	echo $salida;
 }

@@ -1,5 +1,7 @@
 <?php
 require_once('view/header.php');
+// Si no es admin vuelve p'atrás
+autorizarAcceso();
 ?>
 
 <!-- Contenido -->

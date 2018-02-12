@@ -19,7 +19,7 @@
 
 	// Si se ha enviado btLogin pues autentica
 	if (isset($_POST['btLogin'])){
-		autenticar();
+		autenticar($con);
 	}
 ?>
 <!DOCTYPE html>
@@ -46,19 +46,30 @@
 				</div>
 				<!-- Menú -->
 				<div class='row'>
-					<div class="col-6">
-						<?php mostrarMenuNavegacion() ?>
-					</div>
-					<div class="col-6">
+					<div id='zonaMenu' class="col-6">
 						<?php
-							// Compruebo si el usuario está logueado
-							if ($_SESSION['dni']){
-								mostrarIconoCarrito();
-							}
-							else {
-								mostrarFormularioLogin();
-							}
-						?> 
+						// Si está autenticado con un usuario administrador muestra el menú de admin
+						if (isAdmin()){
+							mostrarMenuAdministracion();
+						}
+						// Si no pues muestra el menú de navegación normal
+						else {
+							mostrarMenuNavegacion();
+						}
+						?>
+					</div>
+					<div id='zonaAuthCarrito' class="col-6">
+						<?php 
+						// Si no está autenticado muestra el formulario de login
+						if (!autenticado()){
+							mostrarFormularioLogin();
+						}
+						// Y si lo está pues muestra el enlace de desconexión y el icono del carrito
+						else {
+							mostrarDesconexion();
+							mostrarIconoCarrito(count($carrito->items));
+						}
+						?>
 					</div>
 				</div>
 			</header>

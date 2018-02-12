@@ -11,7 +11,7 @@ function obtenerPost($con, $nombre){
 }
 
 // Función para obtener datos pasados por GET y que se filtren antes de manejarlos
-function obtenerGET($nombre){
+function obtenerGET($con, $nombre){
 	if (isset($_GET["$nombre"]) && $_GET["$nombre"] != ""){
 		return $con->real_escape_string($_GET["$nombre"]);
 	}
@@ -29,15 +29,15 @@ function insertarMensaje($mensaje){
 	array_push($_SESSION['colaMensajes'], $mensaje);
 }
 
-function autenticar(){
+function autenticar($con){
 	// Compruebo si se han pasado las credenciales
-	if (obtenerPost("dni") && obtenerPost("password")){
-		$dni = obtenerPost("dni");
-		$password = obtenerPost("password");
+	if (obtenerPost($con, "dni") && obtenerPost($con, "password")){
+		$dni = obtenerPost($con, "dni");
+		$password = obtenerPost($con, "password");
 		// Preparo una consulta para obtener el nombre de usuario que haya en la bbdd si el dni y la password almacenadas coinciden con las proporcionadas
 		$consulta = "SELECT nombre FROM  clientes WHERE dniCliente='$dni' AND pwd='$password'";
 		// Compruebo que se retorna una respuesta
-		if ($respuesta = mysqli_query($link, $consulta)){
+		if ($respuesta = mysqli_query($con, $consulta)){
 			// Compruebo que devuelve alguna fila
 			if ($fila = mysqli_fetch_assoc($respuesta)) {
 				// Compruebo que la fila tiene el campo que busco
@@ -74,6 +74,28 @@ function autenticado() {
 	}
 	else {
 		return false;
+	}
+}
+
+// Función que devuelve true o false según el usuario autenticado sea el admin o no
+function isAdmin() {
+	if (isset($_SESSION['usuario'])){
+		switch ($_SESSION['dni']){
+			case '48404267P':
+				$admin = true;
+				break;
+			default:
+				$admin = false;
+		}
+		return $admin;
+	}
+}
+
+// Función que autoriza o no el acceso a una página dependiendo de si se es o no admin
+function autorizarAcceso(){
+	if (!isAdmin()){
+		insertarMensaje(['tipo'=>'danger', 'texto'=>'No estás autorizado a visitar esta página.']);
+		volverInicio();
 	}
 }
 
