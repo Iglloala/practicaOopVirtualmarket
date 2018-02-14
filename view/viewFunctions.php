@@ -209,4 +209,39 @@ function getFormInsertarProducto(){
 	echo $salida;
 }
 
+//Función para mostrar productos en la vista principal
+function mostrarProducto($producto, $autenticado){
+	// Preparo la url de detalle
+	$urlDetalle = "detalle.php?idProducto=$producto->idProducto";
+	// Empiezo a preparar la salida
+	$salida = '';
+	$salida .= "<div class='col-3'>";
+	$salida .= "  <div class='card producto'>";
+	$salida .= "    <div class='card-header text-white bg-dark'>";
+	$salida .= "      <a href='$urlDetalle'>";
+	$salida .= "        <h5 class='card-title'>$producto->nombre</h5>";
+	$salida .= "      </a>";
+	$salida .= "    </div>";
+	$salida .= "    <div class='card-body'>";
+	$salida .= "      <a href='$urlDetalle'>";
+	$salida .= "        <img class='card-imp-top' src='img/$producto->foto'>";
+	$salida .= "      </a>";
+	$salida .= "    </div>";
+	$salida .= "    <div class='card-footer text-white bg-dark'>";
+	$salida .= "      <span class='precio'>$producto->precio €</span>";
+	// Si está autenticado cargo también un formulario para añadir al carrito
+	if ($autenticado){
+		$salida .= "<form method='post' action='vercarrito.php'>";
+		$salida .= "  <input name='idProducto' type='hidden' value='$producto->idProducto'>";
+		$salida .= "  <input name='cantidad' type='hidden' value='1'>";
+		$salida .= "  <input class='btAniadir' type='submit' name='btAniadir' value='Añadir al carrito'>";
+		$salida .= "</form>";
+	}
+	$salida .= "    </div>";
+	$salida .= "  </div>";
+	$salida .= "</div>";
+	// Y ya pue slo muestro
+	echo $salida;
+}
+
 ?>

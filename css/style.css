@@ -35,6 +35,36 @@
 	padding-top: 1rem;	
 }
 
+.card.producto {
+	margin-bottom: 1.5rem;
+}
+
+.card.producto a {
+	text-align: center;
+}
+
+.card.producto .card-header a{
+	color: rgba(255, 255, 255, 1);
+}
+.card.producto .card-header a:hover{
+	text-decoration: none;
+}
+
+.card.producto img {
+	width: 200px;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.card.producto .card-footer {
+	text-align: center;
+}
+.card-footer .btAniadir{
+	cursor: pointer;
+	white-space: normal;
+}
+
 #footer-dch {
 	text-align: right;
 }

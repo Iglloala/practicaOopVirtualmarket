@@ -8,7 +8,7 @@ class Carrito {
 	//-------------------
 	public function __construct(){
 		// Comprueba si existe la cookie
-		if ($_COOKIE['lineasCarrito']){
+		if (isset($_COOKIE['lineasCarrito'])){
 			// Y si tiene lineas
 			if(count(json_decode($_COOKIE['lineasCarrito']))>0){
 				// Las carga en el objeto
@@ -42,11 +42,11 @@ class Carrito {
 	// MÉTODOS
 	//-------------------
 
-	public function aniadirProducto($producto, $cantidad){
+	public function aniadirProducto($idProducto, $cantidad){
 		// Haz cosas
 	}
 
-	public function eliminarProducto($producto){
+	public function eliminarProducto($idProducto){
 		// Haz cosas
 	}
 }

@@ -42,6 +42,36 @@ Class Producto{
 	}
 
 	// Métodos
+	public static function obtenerProductos($con){
+		// Preparo la consulta sql
+		$sql = 'SELECT * FROM productos';
+		// Ejecuto la consulta
+		$resultado = $con->query($sql);
+		// Si hay filas
+		if ($resultado->num_rows){
+			$productos = [];
+			while ($fila = $resultado->fetch_assoc()){
+				// Preparo los campos
+				$idProducto = $fila['idProducto'];
+				$nombre = $fila['nombre'];
+				$origen = $fila['origen'];
+				$foto = $fila['foto'];
+				$marca = $fila['marca'];
+				$categoria = $fila['categoria'];
+				$peso = $fila['peso'];
+				$volumen = $fila['volumen'];
+				$precio = $fila['precio'];
+				// Genero una instancia de producto y la añado al array de productos
+				$nuevoProducto = new Producto($nombre, $origen, $foto, $marca, $categoria, $peso, $volumen, $precio, $idProducto);
+				array_push($productos, $nuevoProducto);
+			}
+			return $productos;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public function insertar($con){
 		// Recupero el ultimo id de la tabla
 		$result = $con->query("SELECT idProducto FROM productos ORDER BY idProducto DESC LIMIT 1");
