@@ -212,7 +212,7 @@ function getFormInsertarProducto(){
 //Función para mostrar productos en la vista principal
 function mostrarProducto($producto, $autenticado){
 	// Preparo la url de detalle
-	$urlDetalle = "detalle.php?idProducto=$producto->idProducto";
+	$urlDetalle = "detalle.php?idProducto=".$producto->idProducto;
 	// Empiezo a preparar la salida
 	$salida = '';
 	$salida .= "<div class='col-3'>";
@@ -242,6 +242,11 @@ function mostrarProducto($producto, $autenticado){
 	$salida .= "</div>";
 	// Y ya pue slo muestro
 	echo $salida;
+}
+
+// Función para mostrar el detalle de un producto
+function mostrarDetalleProducto($producto){
+	print_r($producto);
 }
 
 ?>

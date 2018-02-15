@@ -1,5 +1,5 @@
 <?php 
-Class Producto{
+Class Producto extends Database{
 	// Propiedades
 	private $idProducto;
 	private $nombre;
@@ -28,7 +28,10 @@ Class Producto{
 	}
 
 	// Contructor
-	public function __construct($nombre, $origen, $foto, $marca, $categoria, $peso, $unidades, $volumen, $precio, $idProducto=""){
+	public function __construct($nombre, $origen, $foto, $marca, $categoria, $peso, $unidades, $volumen, $precio, $idProducto=null){
+		// Llamo al constructor de la base de datos
+		parent::__construct();
+		// Y construyo las propiedades del resto de campos de la clase Producto
 		$this->idProducto = $idProducto;
 		$this->nombre = $nombre;
 		$this->origen = $origen;
@@ -43,7 +46,7 @@ Class Producto{
 
 	// Métodos
 	public static function obtenerProductos($con){
-		// Preparo la consulta sql
+		// Preparo la sentencia sql
 		$sql = 'SELECT * FROM productos';
 		// Ejecuto la consulta
 		$resultado = $con->query($sql);
@@ -59,13 +62,41 @@ Class Producto{
 				$marca = $fila['marca'];
 				$categoria = $fila['categoria'];
 				$peso = $fila['peso'];
+				$unidades = $fila['unidades'];
 				$volumen = $fila['volumen'];
 				$precio = $fila['precio'];
 				// Genero una instancia de producto y la añado al array de productos
-				$nuevoProducto = new Producto($nombre, $origen, $foto, $marca, $categoria, $peso, $volumen, $precio, $idProducto);
+				$nuevoProducto = new Producto($nombre, $origen, $foto, $marca, $categoria, $peso, $unidades, $volumen, $precio, $idProducto);
 				array_push($productos, $nuevoProducto);
 			}
 			return $productos;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static function obtenerProducto($con, $idProducto){
+		// Preparo la sentencia sql
+		$sql = "SELECT * FROM productos WHERE idProducto='$idProducto'";
+		// Ejecuto la consulta
+		$resultado = $con->query($sql);
+		if ($fila = $resultado->fetch_assoc()) {
+			// Preparo los campos
+			$idProducto = $fila['idProducto'];
+			$nombre = $fila['nombre'];
+			$origen = $fila['origen'];
+			$foto = $fila['foto'];
+			$marca = $fila['marca'];
+			$categoria = $fila['categoria'];
+			$peso = $fila['peso'];
+			$unidades = $fila['unidades'];
+			$volumen = $fila['volumen'];
+			$precio = $fila['precio'];
+			// Genero una instancia de producto
+			$producto = new Producto($nombre, $origen, $foto, $marca, $categoria, $peso, $unidades, $volumen, $precio, $idProducto);
+			// Y la retorno
+			return $producto;
 		}
 		else {
 			return false;
