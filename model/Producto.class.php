@@ -1,5 +1,5 @@
 <?php 
-Class Producto extends Database{
+Class Producto{
 	// Propiedades
 	private $idProducto;
 	private $nombre;

@@ -246,7 +246,26 @@ function mostrarProducto($producto, $autenticado){
 
 // Función para mostrar el detalle de un producto
 function mostrarDetalleProducto($producto){
-	print_r($producto);
+	// Empiezo a preparar la salida
+	$salida = "";
+	$salida .= "<div class='col-12'>";
+	$salida .= "  <h1>$producto->nombre</h1>";
+	$salida .= "</div>";
+	$salida .= "<div class='col-4 producto-foto'>";
+	$salida .= "  <img src='img/$producto->foto'>";
+	$salida .= "</div>";
+	$salida .= "<div class='col-8'>";
+	$salida .= "  <ul class='producto-caracteristicas'>";
+	$salida .= "    <li class='producto-origen'>Origen: $producto->origen</li>";
+	$salida .= "    <li class='producto-marca'>Marca: $producto->marca</li>";
+	$salida .= "    <li class='producto-categoria'>Categoría: $producto->categoria</li>";
+	$salida .= "    <li class='producto-peso'>Peso: $producto->peso</li>";
+	$salida .= "    <li class='producto-unidades'>Unidades: $producto->unidades</li>";
+	$salida .= "    <li class='producto-volumen'>Volumen: $producto->volumen</li>";
+	$salida .= "  </ul>";
+	$salida .= "</div>";
+	// Muestro la salida
+	echo $salida;
 }
 
 ?>

@@ -65,6 +65,11 @@
 	white-space: normal;
 }
 
+
+.producto-caracteristicas > li{
+	list-style: none;
+}
+
 #footer-dch {
 	text-align: right;
 }
