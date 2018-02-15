@@ -29,8 +29,6 @@ Class Producto extends Database{
 
 	// Contructor
 	public function __construct($nombre, $origen, $foto, $marca, $categoria, $peso, $unidades, $volumen, $precio, $idProducto=null){
-		// Llamo al constructor de la base de datos
-		parent::__construct();
 		// Y construyo las propiedades del resto de campos de la clase Producto
 		$this->idProducto = $idProducto;
 		$this->nombre = $nombre;
